@@ -7,9 +7,15 @@ import 'package:emart_app/widgets_common/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  bool isCheck = false;
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -20,13 +26,13 @@ class SignUp extends StatelessWidget {
               children: [
                 HeightBox(MediaQuery.of(context).size.height * 0.10),
                 appLogoWidget(),
-                HeightBox(10),
+                const HeightBox(10),
                 Text("Join the  $appname",
                     style: TextStyle(color: whiteColor, fontFamily: bold)),
                 HeightBox(10),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.80,
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(36),
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -62,9 +68,14 @@ class SignUp extends StatelessWidget {
                       Row(
                         children: [
                           Checkbox(
-                            checkColor: redColor,
-                            value: false,
-                            onChanged: (newValue) {},
+                            activeColor: redColor,
+                            checkColor: whiteColor,
+                            value: isCheck,
+                            onChanged: (newValue) {
+                              setState(() {
+                                isCheck = newValue!;
+                              });
+                            },
                           ),
                           Expanded(
                             child: RichText(
@@ -72,28 +83,28 @@ class SignUp extends StatelessWidget {
                                 TextSpan(
                                   text: "I agree to the",
                                   style: TextStyle(
-                                    fontFamily: bold,
+                                    fontFamily: regular,
                                     color: fontGrey,
                                   ),
                                 ),
                                 TextSpan(
                                   text: termAndCond,
                                   style: TextStyle(
-                                    fontFamily: bold,
+                                    fontFamily: regular,
                                     color: redColor,
                                   ),
                                 ),
                                 TextSpan(
                                   text: " & ",
                                   style: TextStyle(
-                                    fontFamily: bold,
+                                    fontFamily: regular,
                                     color: redColor,
                                   ),
                                 ),
                                 TextSpan(
                                   text: privacyPolicy,
                                   style: TextStyle(
-                                    fontFamily: bold,
+                                    fontFamily: regular,
                                     color: redColor,
                                   ),
                                 ),
@@ -105,7 +116,7 @@ class SignUp extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         child: myButton(
-                          color: redColor,
+                          color: isCheck ? redColor : lightGrey,
                           title: signup,
                           textColor: whiteColor,
                         ),

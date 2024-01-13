@@ -1,6 +1,7 @@
 import 'package:emart_app/consts/consts.dart';
 import 'package:emart_app/consts/list.dart';
 import 'package:emart_app/views/auth_screen/signup_screen.dart';
+import 'package:emart_app/views/home_screen/home_screen.dart';
 import 'package:emart_app/widgets_common/app_logo_widget.dart';
 import 'package:emart_app/widgets_common/bg_widget.dart';
 import 'package:emart_app/widgets_common/button.dart';
@@ -8,7 +9,12 @@ import 'package:emart_app/widgets_common/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -58,7 +64,10 @@ class LoginScreen extends StatelessWidget {
                         child: myButton(
                             color: redColor,
                             title: login,
-                            textColor: whiteColor),
+                            textColor: whiteColor,
+                            onPress: () {
+                              Get.to(() => HomeScreen());
+                            }),
                       ),
                       HeightBox(MediaQuery.of(context).size.height * 0.02),
                       Text(createNewAc),
